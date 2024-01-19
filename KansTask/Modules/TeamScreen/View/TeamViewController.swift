@@ -40,12 +40,7 @@ class TeamViewController: UIViewController {
 
 extension TeamViewController {
     @objc func navigateToPlayerDetails() {
-        let playerDetailsViewModel = PlayerDetailsViewModel()
-        let playerDetailsVC = PlayerDetailsViewController(viewModel: playerDetailsViewModel)
-        playerDetailsVC.modalTransitionStyle = .coverVertical
-        playerDetailsVC.modalPresentationStyle = .fullScreen
-        
-        present(playerDetailsVC, animated: true)
+        viewModel.onTapPlayer.send()
     }
 }
 

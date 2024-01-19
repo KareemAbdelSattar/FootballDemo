@@ -1,14 +1,25 @@
 import Foundation
 import Combine
 
+protocol TeamViewModelCoordinator: AnyObject {
+    func didSelectPlayer()
+}
+
 // MARK: TeamViewModel
 
 class TeamViewModel {
     private let teamFireStore: TeamFireStore
-    var players: PassthroughSubject<Team, Never> = PassthroughSubject()
+    private let coordinator: TeamViewModelCoordinator
+    private var subscription = Set<AnyCancellable>()
     
-    init(teamFireStore: TeamFireStore) {
+    var players: PassthroughSubject<Team, Never> = PassthroughSubject()
+    var onTapPlayer: PassthroughSubject<Void, Never> = PassthroughSubject()
+    
+    init(teamFireStore: TeamFireStore, coordinator: TeamViewModelCoordinator) {
         self.teamFireStore = teamFireStore
+        self.coordinator = coordinator
+        
+        binding()
     }
     
     func viewDidLoad() {
@@ -37,4 +48,10 @@ extension TeamViewModel: TeamViewModelOutput {}
 
 // MARK: Private Handlers
 
-private extension TeamViewModel {}
+private extension TeamViewModel {
+    func binding() {
+        onTapPlayer.sink { [weak self] _ in
+            self?.coordinator.didSelectPlayer()
+        }.store(in: &subscription)
+    }
+}

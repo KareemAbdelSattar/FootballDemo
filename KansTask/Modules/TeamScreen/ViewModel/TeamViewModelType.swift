@@ -7,7 +7,9 @@ typealias TeamViewModelType = TeamViewModelInput & TeamViewModelOutput
 
 /// Team ViewModel Input
 ///
-protocol TeamViewModelInput {}
+protocol TeamViewModelInput {
+    var onTapPlayer: PassthroughSubject<Void, Never> { get }
+}
 
 /// Team ViewModel Output
 ///

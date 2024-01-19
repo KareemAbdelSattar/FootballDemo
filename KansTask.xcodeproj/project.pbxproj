@@ -159,8 +159,8 @@
 		EB0AA5142B5AEDC800F2CB25 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				EB144CF82B5AA17800EA2CFD /* TeamViewModelType.swift */,
 				EB144CFA2B5AA17800EA2CFD /* TeamViewModel.swift */,
+				EB144CF82B5AA17800EA2CFD /* TeamViewModelType.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
